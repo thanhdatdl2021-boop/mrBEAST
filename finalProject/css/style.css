@@ -1,0 +1,68 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* 1. Mobile view (mặc định - không dùng media query, lưới 1 cột, gap 10px) */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.grid figure {
+  margin: 0;
+  border: 2px solid #ccc;
+}
+
+.grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 2. Media query 1: Tablet view tại 772px (min-width, không lặp display: grid) */
+@media screen and (min-width: 772px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid figure {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .grid figure:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 3. Media query 2: Large screen view tại 992px (min-width, không lặp quy tắc thừa) */
+@media screen and (min-width: 992px) {
+  .grid figure {
+    border-radius: 0;
+  }
+
+  .grid figure:last-child {
+    grid-column: auto;
+  }
+
+  .grid figure:nth-child(3n) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 4. Media query 3: prefers-reduced-motion (tắt hiệu ứng cuộn) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 5. Media query 4: Dark color scheme (mặc định là light) */
+@media (prefers-color-scheme: dark) {
+  .grid figure {
+    background-color: #1e1e1e;
+    color: #fff3a1;
+    border-color: #000000;
+  }
+}
